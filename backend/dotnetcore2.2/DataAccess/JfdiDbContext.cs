@@ -17,14 +17,16 @@ namespace JFDIList.DataAccess
         public DbSet<Tag> Tags { get; set; }
         public DbSet<TaskItem> Tasks { get; set; }
         public DbSet<TaskList> Lists { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<TaskTag>()
+                .ToTable("TaskTags")
                 .HasKey(tt => new { tt.TaskId, tt.TagId });
-
+                
             builder.Entity<TaskTag>()
                 .HasOne(tt => tt.Task)
                 .WithMany(t => t.TagsTask)

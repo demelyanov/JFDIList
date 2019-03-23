@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JFDIList.Domain.Interfaces
 {
-    public interface ITaskRepository
+    public interface ITasksRepository
     {
     }
 }
