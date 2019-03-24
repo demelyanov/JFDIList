@@ -23,5 +23,16 @@ namespace WebApi.Controllers
         {
             return null;
         }
+
+        [HttpPost]
+        public ActionResult<TaskDto> Post([FromBody] TaskDto model) {
+            return NotFound();
+        }
+
+        [HttpPut]
+        public ActionResult<TaskDto> Update([FromBody] TaskDto model)
+        {
+            return NotFound();
+        }
     }
 }

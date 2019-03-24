@@ -47,6 +47,11 @@ namespace JFDIList.WebApi
             services.AddScoped<ITasksService, TasksService>();
             services.AddScoped<ITasksRepository, TasksRepository>();
 
+
+            services.AddCors(options=> {
+                options.AddPolicy("jfdiPolisy", builder=>builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -64,6 +69,7 @@ namespace JFDIList.WebApi
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("jfdiPolisy");
             app.UseMvc();
         }
     }
