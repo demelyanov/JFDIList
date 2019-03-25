@@ -16,7 +16,7 @@ const API_Done_Task = environment.apiEndpoint + 'tasks/done/';
 export class TasksService {
     constructor(private _http: HttpClient){}
 
-    getList(): Observable<TaskModel[]> | Promise<TaskModel[]> | TaskModel[] {
+    getList(): Observable<TaskModel[]> {
         return this._http.get<TaskModel[]>(API_Get_TaskList).pipe(
             map((res:TaskModel[])=>{ return res.map(r => new TaskModel().deserialize(r))}),
             catchError(error => throwError(error))
@@ -32,10 +32,8 @@ export class TasksService {
 
     saveTask(task: TaskModel): Observable<TaskModel> {
         if(0 === task.id) {
-            console.log('0!= task.id');
             return this.insertTask(task);
         } else {
-            console.log('task.id', task.id);
             return this.updateTask(task);
         }
     }
@@ -54,8 +52,13 @@ export class TasksService {
         );
     }
 
-    taskDone(taskId: number): void{
-        this._http.put(API_Done_Task + `${taskId}`, taskId).pipe(
+    setState(taskId: number, done: boolean): Observable<boolean>{
+        const data = {
+            done: done 
+        };
+        console.log('yahoo');
+        return this._http.post(API_Done_Task + `${taskId}`, data).pipe(
+            map(r=>{return true;}),
             catchError(error => throwError(error))
         );
     }

@@ -1,1 +1,12 @@
-<p>It works!</p>
+
+<form>
+    <div class="form-check" *ngFor="let task of Tasks">
+        <input type="checkbox" class="form-check-input" (change)="onTaskChange(task)" 
+         name="taskItem">
+        <a class="form-check-label"
+        [class.done]="task.done" 
+        
+
+        >{{task.done}} {{task.task}} </a>
+    </div>
+</form>

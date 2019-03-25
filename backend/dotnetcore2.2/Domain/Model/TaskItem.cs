@@ -13,7 +13,9 @@ namespace JFDIList.Domain.Model
         public string Task { get; set; }
         public DateTime? TaskDate { get; set; }
         public DateTime CreatedDate { get; set; }
-
+        public bool Done { get; set; }
+        public bool Important { get; set; }
+        public bool Urgently { get; set; }
         public IEnumerable<TaskTag> TagsTask { get; set; }
     }
 }

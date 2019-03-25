@@ -21,16 +21,29 @@ namespace WebApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<TaskDto>> Get()
         {
-            return null;
+            return Ok(_tasksService.List());
         }
 
         [HttpPost]
-        public ActionResult<TaskDto> Post([FromBody] TaskDto model) {
-            return NotFound();
+        public ActionResult<TaskDto> Post([FromBody] TaskDto model)
+        {
+            var result = _tasksService.Save(model);
+            if (null == result)
+                return NotFound();
+            else
+                return Ok(result);
         }
 
         [HttpPut]
-        public ActionResult<TaskDto> Update([FromBody] TaskDto model)
+        [Route("{id}")]
+        public ActionResult<TaskDto> Update(int id, [FromBody] TaskDto model)
+        {
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("done/{id}")]
+        public ActionResult<TaskDto> SetTaskState(int id, [FromBody] bool done)
         {
             return NotFound();
         }
